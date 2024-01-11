@@ -14,6 +14,14 @@ pnpm dev
 bun dev
 ```
 
+## init shadcn with bun
+
+bunx shadcn-ui@latest init (use node >= 18)
+
+## Add components from shadcn
+
+bunx shadcn-ui@latest add COMPONENT_NAME
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
