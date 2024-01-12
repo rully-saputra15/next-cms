@@ -4,8 +4,8 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
-} from "../../ui/card";
+  CardTitle
+} from '../../ui/card';
 
 type CardProps = {
   title: string;

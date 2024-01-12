@@ -1,7 +1,7 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-import InsightSection from "./blocks/InsightSection";
+'use client';
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
+import InsightSection from './blocks/InsightSection';
 
 const HomePage = () => {
   const router = useRouter();
@@ -12,7 +12,7 @@ const HomePage = () => {
   return (
     <main>
       <InsightSection />
-      <Button onClick={() => handleNavigate("/articles")}>Click Me</Button>
+      <Button onClick={() => handleNavigate('/articles')}>Click Me</Button>
     </main>
   );
 };
