@@ -11,39 +11,40 @@ type CardProps = {
   title: string;
   description: string;
   content: string;
+  note: string;
 };
-const ContentCard = ({ title, description, content }: CardProps) => (
-  <Card>
+const ContentCard = ({ title, description, content, note }: CardProps) => (
+  <Card className="flex-1">
     <CardHeader>
       <CardTitle>{title}</CardTitle>
       <CardDescription>{description}</CardDescription>
     </CardHeader>
     <CardContent>
-      <p>{content}</p>
+      <p className="text-xl font-bold">{content}</p>
+      <p className="text-sm text-muted-foreground">{note}</p>
     </CardContent>
-    <CardFooter className="flex justify-between">
-      <p>Card footer</p>
-      <p>Card footer</p>
-    </CardFooter>
   </Card>
 );
 const InsightSection = () => {
   return (
-    <section className="flex flex-row items-center justify-center gap-5">
+    <section className="flex flex-row items-center justify-start gap-5">
       <ContentCard
         title="Title 1"
         description="Description 1"
-        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis efficitur eros, vel fermentum nisl efficitur vitae. Ut non tellus orci. Proin molestie sed quam at imperdiet. Nulla pellentesque at quam et pulvinar. "
+        content="$45,231.89"
+        note="+20% growth"
       />
       <ContentCard
         title="Title 2"
         description="Description 2"
-        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis efficitur eros, vel fermentum nisl efficitur vitae. Ut non tellus orci. Proin molestie sed quam at imperdiet. Nulla pellentesque at quam et pulvinar. "
+        content="+2350"
+        note="-10% growth"
       />
       <ContentCard
         title="Title 3"
         description="Description 3"
-        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis efficitur eros, vel fermentum nisl efficitur vitae. Ut non tellus orci. Proin molestie sed quam at imperdiet. Nulla pellentesque at quam et pulvinar. "
+        content="+12,234"
+        note="+200% get new subcribers"
       />
     </section>
   );
