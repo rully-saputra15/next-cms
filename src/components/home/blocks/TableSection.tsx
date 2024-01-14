@@ -1,3 +1,4 @@
+import { Badge } from '@/components/ui/badge';
 import {
   Table,
   TableRow,
@@ -12,20 +13,30 @@ const TableSection = () => {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Invoice</TableHead>
-          <TableHead>Date</TableHead>
+          <TableHead>ID</TableHead>
+          <TableHead>Published Date</TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead>Total Views</TableHead>
           <TableHead className="text-right">Title</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         <TableRow>
-          <TableCell>INV001</TableCell>
+          <TableCell>001</TableCell>
           <TableCell>2021-09-01</TableCell>
+          <TableCell>
+            <Badge variant="secondary">Published</Badge>
+          </TableCell>
+          <TableCell className="font-bold">20.000</TableCell>
           <TableCell className="text-right">Alice in Wonderland</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell>INV002</TableCell>
+          <TableCell>002</TableCell>
           <TableCell>2021-09-02</TableCell>
+          <TableCell>
+            <Badge variant="secondary">Published</Badge>
+          </TableCell>
+          <TableCell className="font-bold">50.000</TableCell>
           <TableCell className="text-right">Harry Potter</TableCell>
         </TableRow>
       </TableBody>

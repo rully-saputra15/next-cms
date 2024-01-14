@@ -1,23 +1,23 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from '../../ui/card';
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
+import { AiOutlineDollar } from 'react-icons/ai';
+import { LuUsers } from 'react-icons/lu';
+import { CiCreditCard1 } from 'react-icons/ci';
+import { MdOutlineShowChart } from 'react-icons/md';
 
 type CardProps = {
   title: string;
-  description: string;
+  description?: string;
   content: string;
   note: string;
+  icon: React.ReactNode;
 };
-const ContentCard = ({ title, description, content, note }: CardProps) => (
+
+const ContentCard = ({ title, content, note, icon }: CardProps) => (
   <Card className="flex-1">
-    <CardHeader>
+    <CardHeader className="flex flex-row justify-between items-center">
       <CardTitle>{title}</CardTitle>
-      <CardDescription>{description}</CardDescription>
+      {icon}
     </CardHeader>
     <CardContent>
       <p className="text-xl font-bold">{content}</p>
@@ -25,26 +25,33 @@ const ContentCard = ({ title, description, content, note }: CardProps) => (
     </CardContent>
   </Card>
 );
+
 const InsightSection = () => {
   return (
-    <section className="flex flex-row items-center justify-start gap-5">
+    <section className="flex flex-row flex-wrap items-stretch justify-start gap-5">
       <ContentCard
         title="Title 1"
-        description="Description 1"
         content="$45,231.89"
         note="+20% growth"
+        icon={<AiOutlineDollar className="text-xl" />}
       />
       <ContentCard
         title="Title 2"
-        description="Description 2"
         content="+2350"
         note="-10% growth"
+        icon={<LuUsers className="text-xl" />}
       />
       <ContentCard
         title="Title 3"
-        description="Description 3"
         content="+12,234"
         note="+200% get new subcribers"
+        icon={<CiCreditCard1 className="text-xl" />}
+      />
+      <ContentCard
+        title="Title 4"
+        content="+12,234"
+        note="+200% get new subcribers"
+        icon={<MdOutlineShowChart className="text-xl" />}
       />
     </section>
   );
