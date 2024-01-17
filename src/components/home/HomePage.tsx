@@ -1,17 +1,9 @@
-'use client';
-
 import InsightSection from './blocks/InsightSection';
 import TableSection from './blocks/TableSection';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from '../ui/card';
 import TopUsersComponent from './blocks/TopUsersComponent';
 import { Input } from '../ui/input';
 import ChartSection from './blocks/ChartSection';
+import { InformationCard } from '../core';
 
 const HomePage = () => {
   return (
@@ -21,27 +13,24 @@ const HomePage = () => {
         <Input className="max-w-sm" placeholder="Search" />
       </section>
       <InsightSection />
-      <ChartSection />
+
       <section className="flex flex-row items-stretch justify-between gap-3 flex-wrap">
-        <Card className="flex-1">
-          <CardHeader>
-            <CardTitle>Top Articles</CardTitle>
-            <CardDescription>Lorem ipsum dor selamet</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <TableSection />
-          </CardContent>
-        </Card>
-        <Card className="flex-2">
-          <CardHeader>
-            <CardTitle>Top Users</CardTitle>
-            <CardDescription>Lorem ipsum dor selamet</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <TopUsersComponent />
-          </CardContent>
-        </Card>
+        <InformationCard
+          title="Top Articles"
+          description="Lorem ipsum dor selamet"
+          containerClassName="flex-1"
+        >
+          <TableSection />
+        </InformationCard>
+        <InformationCard
+          title="Top Users"
+          description="Lorem ipsum dor selamet"
+          containerClassName="flex-2"
+        >
+          <TopUsersComponent />
+        </InformationCard>
       </section>
+      <ChartSection />
     </main>
   );
 };
