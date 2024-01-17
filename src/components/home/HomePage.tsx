@@ -1,3 +1,5 @@
+'use client';
+
 import InsightSection from './blocks/InsightSection';
 import TableSection from './blocks/TableSection';
 import {
@@ -9,6 +11,7 @@ import {
 } from '../ui/card';
 import TopUsersComponent from './blocks/TopUsersComponent';
 import { Input } from '../ui/input';
+import ChartSection from './blocks/ChartSection';
 
 const HomePage = () => {
   return (
@@ -18,6 +21,7 @@ const HomePage = () => {
         <Input className="max-w-sm" placeholder="Search" />
       </section>
       <InsightSection />
+      <ChartSection />
       <section className="flex flex-row items-stretch justify-between gap-3 flex-wrap">
         <Card className="flex-1">
           <CardHeader>
