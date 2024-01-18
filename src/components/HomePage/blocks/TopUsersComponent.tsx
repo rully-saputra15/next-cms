@@ -8,14 +8,16 @@ type UserRowProps = {
 
 const UserRow = ({ name, email, totalViews }: UserRowProps) => {
   return (
-    <div className="flex flex-row items-center justiyf-between gap-9">
-      <Avatar>
-        <AvatarImage src="https://source.unsplash.com/random/300x300" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
-      <div className="flex flex-col">
-        <p className="text-md font-semibold">{name}</p>
-        <p className="text-sm text-muted-foreground">{email}</p>
+    <div className="flex flex-row items-center justify-between">
+      <div className="flex flex-row items-center gap-5">
+        <Avatar>
+          <AvatarImage src="https://source.unsplash.com/random/300x300" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+        <div className="flex flex-col">
+          <p className="text-md font-semibold">{name}</p>
+          <p className="text-sm text-muted-foreground">{email}</p>
+        </div>
       </div>
       <p className="text-sm font-bold">{totalViews}</p>
     </div>

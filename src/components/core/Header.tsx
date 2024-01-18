@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { RiAccountCircleFill } from 'react-icons/ri';
 
 const Header = () => {
@@ -6,9 +7,9 @@ const Header = () => {
       <div className="flex flex-row items-center gap-5">
         <h1 className="text-md font-bold">Next CMS</h1>
         <ul className="flex flex-row gap-5">
-          <li>Home</li>
+          <Link href="/">Home</Link>
           <li>Insight</li>
-          <li>Content</li>
+          <Link href="/content">Content</Link>
         </ul>
       </div>
       <div className="flex flex-row items-center gap-5">

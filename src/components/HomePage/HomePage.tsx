@@ -1,15 +1,17 @@
+import { Input } from '../ui/input';
+
 import InsightSection from './blocks/InsightSection';
 import TableSection from './blocks/TableSection';
 import TopUsersComponent from './blocks/TopUsersComponent';
-import { Input } from '../ui/input';
 import ChartSection from './blocks/ChartSection';
-import { InformationCard } from '../core';
+
+import { InformationCard, Title } from '../core';
 
 const HomePage = () => {
   return (
     <main className="p-5 space-y-5">
       <section className="flex flex-row justify-between items-center gap-4">
-        <h1 className="text-2xl font-bold">Dashboard</h1>
+        <Title text="Dashboard" />
         <Input className="max-w-sm" placeholder="Search" />
       </section>
       <InsightSection />
@@ -18,18 +20,19 @@ const HomePage = () => {
         <InformationCard
           title="Top Articles"
           description="Lorem ipsum dor selamet"
-          containerClassName="flex-1"
+          containerClassName="w-8/12"
         >
           <TableSection />
         </InformationCard>
         <InformationCard
           title="Top Users"
           description="Lorem ipsum dor selamet"
-          containerClassName="flex-2"
+          containerClassName="flex-1"
         >
           <TopUsersComponent />
         </InformationCard>
       </section>
+
       <ChartSection />
     </main>
   );
