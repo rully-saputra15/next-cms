@@ -1,9 +1,10 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
 import { AiOutlineDollar } from 'react-icons/ai';
 import { LuUsers } from 'react-icons/lu';
 import { CiCreditCard1 } from 'react-icons/ci';
 import { MdOutlineShowChart } from 'react-icons/md';
+
+import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
 
 type CardProps = {
   title: string;
@@ -13,18 +14,20 @@ type CardProps = {
   icon: React.ReactNode;
 };
 
-const ContentCard = ({ title, content, note, icon }: CardProps) => (
-  <Card className="flex-1">
-    <CardHeader className="flex flex-row justify-between items-center">
-      <CardTitle>{title}</CardTitle>
-      {icon}
-    </CardHeader>
-    <CardContent>
-      <p className="text-xl font-bold">{content}</p>
-      <p className="text-sm text-muted-foreground">{note}</p>
-    </CardContent>
-  </Card>
-);
+const ContentCard = ({ title, content, note, icon }: CardProps) => {
+  return (
+    <Card className="flex-1">
+      <CardHeader className="flex flex-row justify-between items-center">
+        <CardTitle>{title}</CardTitle>
+        {icon}
+      </CardHeader>
+      <CardContent>
+        <p className="text-xl font-bold">{content}</p>
+        <p className="text-sm text-muted-foreground">{note}</p>
+      </CardContent>
+    </Card>
+  );
+};
 
 const InsightSection = () => {
   return (

@@ -9,9 +9,6 @@ import {
   Rectangle,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
   ResponsiveContainer,
   PieChart,
   Pie
@@ -105,13 +102,6 @@ const pieData2 = [
     value: 340
   }
 ];
-
-type ChartProps = {
-  title: string;
-  description: string;
-  className: string;
-  children: React.ReactNode;
-};
 
 const ChartSection = () => {
   return (
