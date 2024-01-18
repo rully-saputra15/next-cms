@@ -1,3 +1,5 @@
+// https://www.lukinotes.com/2022/01/setting-up-nextjs-project-with-eslint-typescript-airbnb.html
+
 {
   "extends": ["next/core-web-vitals"],
   "parser": "@typescript-eslint/parser",
