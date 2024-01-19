@@ -11,99 +11,99 @@ import {
   YAxis,
   ResponsiveContainer,
   PieChart,
-  Pie
+  Pie,
 } from 'recharts';
 
 const data = [
   {
     name: 'Article A',
-    views: '500'
+    views: '500',
   },
   {
     name: 'Article B',
-    views: '280'
+    views: '280',
   },
   {
     name: 'Article C',
-    views: '200'
+    views: '200',
   },
   {
     name: 'Article D',
-    views: '600'
+    views: '600',
   },
   {
     name: 'Article E',
-    views: '300'
+    views: '300',
   },
   {
     name: 'Article F',
-    views: '100'
+    views: '100',
   },
   {
     name: 'Article G',
-    views: '50'
+    views: '50',
   },
   {
     name: 'Article H',
-    views: '400'
+    views: '400',
   },
   {
     name: 'Article I',
-    views: '300'
+    views: '300',
   },
   {
     name: 'Article J',
-    views: '100'
+    views: '100',
   },
   {
     name: 'Article K',
-    views: '50'
+    views: '50',
   },
   {
     name: 'Article L',
-    views: '400'
-  }
+    views: '400',
+  },
 ];
 
 const pieData = [
   {
     name: 'Group A',
-    value: 400
+    value: 400,
   },
   {
     name: 'Group B',
-    value: 500
+    value: 500,
   },
   {
     name: 'Group C',
-    value: 150
+    value: 150,
   },
   {
     name: 'Group D',
-    value: 340
-  }
+    value: 340,
+  },
 ];
 
 const pieData2 = [
   {
     name: 'Group A',
-    value: 200
+    value: 200,
   },
   {
     name: 'Group B',
-    value: 173
+    value: 173,
   },
   {
     name: 'Group C',
-    value: 300
+    value: 300,
   },
   {
     name: 'Group D',
-    value: 340
-  }
+    value: 340,
+  },
 ];
 
-const ChartSection = () => {
+function ChartSection() {
   return (
     <section className="flex flex-row flex-wrap justify-between items-stretch gap-5 min-h-48">
       <InformationCard
@@ -156,6 +156,6 @@ const ChartSection = () => {
       </InformationCard>
     </section>
   );
-};
+}
 
 export default ChartSection;

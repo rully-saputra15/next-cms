@@ -1,10 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from '@/components/ui/card';
 
 type Props = {
@@ -14,12 +16,12 @@ type Props = {
   children: React.ReactNode;
 };
 
-const InformationCard = ({
+function InformationCard({
   title,
   description,
   containerClassName,
-  children
-}: Props) => {
+  children,
+}: Props) {
   return (
     <Card className={containerClassName}>
       <CardHeader>
@@ -29,6 +31,17 @@ const InformationCard = ({
       <CardContent>{children}</CardContent>
     </Card>
   );
+}
+
+InformationCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  containerClassName: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
+
+InformationCard.defaultProps = {
+  containerClassName: '',
 };
 
 export default React.memo(InformationCard);

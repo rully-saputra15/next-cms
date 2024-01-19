@@ -5,10 +5,10 @@ import {
   TableHead,
   TableHeader,
   TableBody,
-  TableCell
+  TableCell,
 } from '@/components/ui/table';
 
-const TableSection = () => {
+function TableSection() {
   return (
     <Table>
       <TableHeader>
@@ -42,6 +42,6 @@ const TableSection = () => {
       </TableBody>
     </Table>
   );
-};
+}
 
 export default TableSection;

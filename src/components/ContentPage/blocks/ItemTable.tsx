@@ -1,3 +1,4 @@
+import React from 'react';
 import { FiEdit3 } from 'react-icons/fi';
 import { FaRegTrashCan } from 'react-icons/fa6';
 
@@ -9,7 +10,7 @@ import {
   TableHead,
   TableRow,
   TableCell,
-  TableBody
+  TableBody,
 } from '@/components/ui/table';
 import { Article, ArticleCategory, DialogType } from '@/lib/types';
 import { Card, CardContent } from '@/components/ui/card';
@@ -19,30 +20,32 @@ type Props = {
   handleOpenDialog: (item: Article, dialogType: DialogType) => void;
 };
 
-const renderCategories = (itemId: string, categories: ArticleCategory[]) => {
-  return categories.map((category) => (
+const renderCategories = (itemId: string, categories: ArticleCategory[]) =>
+  // eslint-disable-next-line implicit-arrow-linebreak
+  categories.map((category) => (
     <Badge variant="secondary" key={`${itemId} ${category.id}`}>
       {category.name}
     </Badge>
   ));
-};
 
-const TableTopHeader = () => (
-  <TableHeader>
-    <TableRow>
-      <TableHead>No</TableHead>
-      <TableHead>ID</TableHead>
-      <TableHead>Title</TableHead>
-      <TableHead>Categories</TableHead>
-      <TableHead>Published Date</TableHead>
-      <TableHead>Status</TableHead>
-      <TableHead>Total Views</TableHead>
-      <TableHead>Actions</TableHead>
-    </TableRow>
-  </TableHeader>
-);
+function TableTopHeader() {
+  return (
+    <TableHeader>
+      <TableRow>
+        <TableHead>No</TableHead>
+        <TableHead>ID</TableHead>
+        <TableHead>Title</TableHead>
+        <TableHead>Categories</TableHead>
+        <TableHead>Published Date</TableHead>
+        <TableHead>Status</TableHead>
+        <TableHead>Total Views</TableHead>
+        <TableHead>Actions</TableHead>
+      </TableRow>
+    </TableHeader>
+  );
+}
 
-const ItemTable = ({ data, handleOpenDialog }: Props) => {
+function ItemTable({ data, handleOpenDialog }: Props) {
   return (
     <Card>
       <CardContent>
@@ -89,6 +92,6 @@ const ItemTable = ({ data, handleOpenDialog }: Props) => {
       </CardContent>
     </Card>
   );
-};
+}
 
 export default ItemTable;

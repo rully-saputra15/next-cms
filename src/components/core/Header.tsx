@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { RiAccountCircleFill } from 'react-icons/ri';
 
-const Header = () => {
+function Header() {
   return (
     <nav className="flex flex-row justify-between items-center border-b p-5">
       <div className="flex flex-row items-center gap-5">
@@ -19,6 +19,6 @@ const Header = () => {
       </div>
     </nav>
   );
-};
+}
 
 export default Header;

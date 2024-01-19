@@ -3,7 +3,7 @@
 {
   "extends": ["next/core-web-vitals"],
   "parser": "@typescript-eslint/parser",
-  "rules": { "react/jsx-filename-extension": [0] },
+  "rules": { "react/jsx-filename-extension": [0], "import/extensions": [0] },
   "overrides": [
     {
       "files": ["*.ts", "*.tsx"],
@@ -11,5 +11,6 @@
         "project": ["./tsconfig.json"]
       }
     }
-  ]
+  ],
+  "ignorePatterns": ["src/components/ui"]
 }

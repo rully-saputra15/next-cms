@@ -7,7 +7,7 @@ import ChartSection from './blocks/ChartSection';
 
 import { InformationCard, Title } from '../core';
 
-const HomePage = () => {
+function HomePage() {
   return (
     <main className="p-5 space-y-5">
       <section className="flex flex-row justify-between items-center gap-4">
@@ -36,6 +36,6 @@ const HomePage = () => {
       <ChartSection />
     </main>
   );
-};
+}
 
 export default HomePage;

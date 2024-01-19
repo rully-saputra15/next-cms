@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { AiOutlineDollar } from 'react-icons/ai';
 import { LuUsers } from 'react-icons/lu';
 import { CiCreditCard1 } from 'react-icons/ci';
@@ -6,7 +8,7 @@ import { MdOutlineShowChart } from 'react-icons/md';
 
 import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
 
-type CardProps = {
+type ContentCardProps = {
   title: string;
   description?: string;
   content: string;
@@ -14,7 +16,13 @@ type CardProps = {
   icon: React.ReactNode;
 };
 
-const ContentCard = ({ title, content, note, icon }: CardProps) => {
+function ContentCard({
+  title,
+  content,
+  note,
+  description,
+  icon,
+}: ContentCardProps) {
   return (
     <Card className="flex-1">
       <CardHeader className="flex flex-row justify-between items-center">
@@ -27,9 +35,9 @@ const ContentCard = ({ title, content, note, icon }: CardProps) => {
       </CardContent>
     </Card>
   );
-};
+}
 
-const InsightSection = () => {
+function InsightSection() {
   return (
     <section className="flex flex-row flex-wrap items-stretch justify-start gap-5">
       <ContentCard
@@ -58,6 +66,17 @@ const InsightSection = () => {
       />
     </section>
   );
+}
+
+ContentCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  note: PropTypes.string.isRequired,
+  icon: PropTypes.node.isRequired,
+};
+
+ContentCard.defaultProps = {
+  description: '',
 };
 
 export default InsightSection;

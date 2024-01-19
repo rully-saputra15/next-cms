@@ -6,7 +6,7 @@ type UserRowProps = {
   totalViews: number;
 };
 
-const UserRow = ({ name, email, totalViews }: UserRowProps) => {
+function UserRow({ name, email, totalViews }: UserRowProps) {
   return (
     <div className="flex flex-row items-center justify-between">
       <div className="flex flex-row items-center gap-5">
@@ -22,9 +22,9 @@ const UserRow = ({ name, email, totalViews }: UserRowProps) => {
       <p className="text-sm font-bold">{totalViews}</p>
     </div>
   );
-};
+}
 
-const TopUsersComponent = () => {
+function TopUsersComponent() {
   return (
     <div className="flex flex-col gap-3">
       <UserRow name="Kevin Kevin" email="coba@gmail.com" totalViews={2000} />
@@ -32,6 +32,6 @@ const TopUsersComponent = () => {
       <UserRow name="Mavin Kevin" email="coba@gmail.com" totalViews={7000} />
     </div>
   );
-};
+}
 
 export default TopUsersComponent;
