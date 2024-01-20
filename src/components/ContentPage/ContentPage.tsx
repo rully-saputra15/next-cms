@@ -2,9 +2,18 @@
 
 import React from 'react';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import {
+  Menubar,
+  MenubarContent,
+  MenubarMenu,
+  MenubarItem,
+  MenubarTrigger,
+} from '@/components/ui/menubar';
 
 import { Article, DialogType } from '@/lib/types';
-import useDialog from '@/hooks/useDialog';
+import { useDialog, useDebounce } from '@/hooks';
+
 import { Title } from '../core';
 import ItemTable from './blocks/ItemTable';
 
@@ -24,7 +33,8 @@ import {
   SelectContent,
   SelectItem,
 } from '../ui/select';
-import { Button } from '../ui/button';
+
+import { IoMdMenu } from 'react-icons/io';
 
 type ModalProps = {
   isOpen: boolean;
@@ -124,6 +134,7 @@ function Modal({ isOpen, selectedArticle, onClose }: ModalProps) {
 
 function ContentPage() {
   const [data, setData] = React.useState<Article[]>(dummyData);
+  const [query, setQuery] = React.useState<string>('');
   const [selectedArticle, setSelectedArticle] = React.useState<Article>({
     id: '',
     publishedDate: '',
@@ -132,17 +143,57 @@ function ContentPage() {
     categories: [],
     title: '',
   });
+
   const { isOpen, onOpen, onClose } = useDialog();
 
   const handleOpenDialog = (article: Article, dialogType: DialogType) => {
     setSelectedArticle(article);
     onOpen();
   };
+
+  const handleInput = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = ev.target;
+    setQuery(value);
+    handleSearch(value);
+  };
+
+  const handleSearch = useDebounce((value: string) => {
+    const loweredValue = value.toLowerCase();
+    let data: Article[] = [];
+
+    if (!loweredValue) {
+      data.push(...dummyData);
+    }
+
+    data = dummyData.filter((item) =>
+      item.title.toLowerCase().includes(loweredValue),
+    );
+
+    setData(data);
+  }, 500);
+
   return (
     <main className="p-5 space-y-5">
-      <section className="flex flex-row justify-between items-center">
+      <section className="flex flex-row flex-1 justify-between items-center">
         <Title text="Content" />
-        <Input className="max-w-sm" placeholder="Search" />
+        <div className="flex flex-row gap-2 w-72">
+          <Menubar>
+            <MenubarMenu>
+              <MenubarTrigger>
+                <IoMdMenu />
+              </MenubarTrigger>
+              <MenubarContent>
+                <MenubarItem>Bulk Delete</MenubarItem>
+                <MenubarItem>Bulk Publish</MenubarItem>
+              </MenubarContent>
+            </MenubarMenu>
+          </Menubar>
+          <Input
+            placeholder="Search"
+            value={query}
+            onChange={(ev) => handleInput(ev)}
+          />
+        </div>
       </section>
 
       <ItemTable data={data} handleOpenDialog={handleOpenDialog} />
