@@ -1,0 +1,51 @@
+{
+  "data": [
+    {
+      "id": "001",
+      "publishedDate": "2021-09-01",
+      "status": "Published",
+      "totalViews": "20.000",
+      "categories": [
+        {
+          "id": "CAT-001",
+          "name": "Fantasy"
+        },
+        {
+          "id": "CAT-002",
+          "name": "Adventure"
+        }
+      ],
+      "title": "Lorem Ipsum dor Selamet 1"
+    },
+    {
+      "id": "002",
+      "publishedDate": "2021-09-01",
+      "status": "Draft",
+      "categories": [
+        {
+          "id": "CAT-001",
+          "name": "Fantasy"
+        },
+        {
+          "id": "CAT-002",
+          "name": "Adventure"
+        }
+      ],
+      "totalViews": "10.000",
+      "title": "Lorem Ipsum dor Selamet 2"
+    },
+    {
+      "id": "003",
+      "publishedDate": "2021-09-01",
+      "status": "Published",
+      "categories": [
+        {
+          "id": "CAT-003",
+          "name": "Horror"
+        }
+      ],
+      "totalViews": "30.000",
+      "title": "Lorem Ipsum dor Selamet 3"
+    }
+  ]
+}

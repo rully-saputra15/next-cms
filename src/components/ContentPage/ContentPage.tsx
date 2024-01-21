@@ -1,6 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
+import dynamic from 'next/dynamic';
+import { IoMdMenu } from 'react-icons/io';
+
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,9 +16,11 @@ import {
 
 import { Article, DialogType } from '@/lib/types';
 import { useDialog, useDebounce } from '@/hooks';
+import { url } from '@/config/api';
 
-import { Title } from '../core';
-import ItemTable from './blocks/ItemTable';
+import { LoadingSkeleton, Title } from '../core';
+
+const ItemTable = dynamic(() => import('./blocks/ItemTable'));
 
 import {
   Dialog,
@@ -33,8 +38,6 @@ import {
   SelectContent,
   SelectItem,
 } from '../ui/select';
-
-import { IoMdMenu } from 'react-icons/io';
 
 type ModalProps = {
   isOpen: boolean;
@@ -133,7 +136,7 @@ function Modal({ isOpen, selectedArticle, onClose }: ModalProps) {
 }
 
 function ContentPage() {
-  const [data, setData] = React.useState<Article[]>(dummyData);
+  const [data, setData] = React.useState<Article[]>([]);
   const [query, setQuery] = React.useState<string>('');
   const [selectedArticle, setSelectedArticle] = React.useState<Article>({
     id: '',
@@ -146,6 +149,15 @@ function ContentPage() {
 
   const { isOpen, onOpen, onClose } = useDialog();
 
+  React.useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const response = await fetch(`${url}/data`);
+    const data = await response.json();
+    setData(data);
+  };
   const handleOpenDialog = (article: Article, dialogType: DialogType) => {
     setSelectedArticle(article);
     onOpen();
@@ -159,15 +171,14 @@ function ContentPage() {
 
   const handleSearch = useDebounce((value: string) => {
     const loweredValue = value.toLowerCase();
-    let data: Article[] = [];
 
-    if (!loweredValue) {
-      data.push(...dummyData);
-    }
-
-    data = dummyData.filter((item) =>
-      item.title.toLowerCase().includes(loweredValue),
-    );
+    const data = dummyData.filter((item) => {
+      if (loweredValue) {
+        return item.title.toLowerCase().includes(loweredValue);
+      } else {
+        return item;
+      }
+    });
 
     setData(data);
   }, 500);
@@ -196,7 +207,9 @@ function ContentPage() {
         </div>
       </section>
 
-      <ItemTable data={data} handleOpenDialog={handleOpenDialog} />
+      <Suspense fallback={<LoadingSkeleton />}>
+        <ItemTable data={data} handleOpenDialog={handleOpenDialog} />
+      </Suspense>
       <Modal
         isOpen={isOpen}
         selectedArticle={selectedArticle}
