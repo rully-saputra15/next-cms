@@ -2,23 +2,13 @@
 
 import React, { Suspense } from 'react';
 import dynamic from 'next/dynamic';
-import { IoMdMenu } from 'react-icons/io';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import {
-  Menubar,
-  MenubarContent,
-  MenubarMenu,
-  MenubarItem,
-  MenubarTrigger,
-} from '@/components/ui/menubar';
 
-import { Article, DialogType } from '@/lib/types';
-import { useDialog, useDebounce } from '@/hooks';
-import { url } from '@/config/api';
+import { Article } from '@/lib/types';
 
-import { LoadingSkeleton, Title } from '../core';
+import { LoadingSkeleton } from '../core';
 
 const ItemTable = dynamic(() => import('./blocks/ItemTable'));
 
@@ -38,6 +28,9 @@ import {
   SelectContent,
   SelectItem,
 } from '../ui/select';
+import useContentPage from './useContentPage';
+import HeaderPage from './blocks/HeaderPage';
+import FooterPage from './blocks/FooterPage';
 
 type ModalProps = {
   isOpen: boolean;
@@ -136,80 +129,16 @@ function Modal({ isOpen, selectedArticle, onClose }: ModalProps) {
 }
 
 function ContentPage() {
-  const [data, setData] = React.useState<Article[]>([]);
-  const [query, setQuery] = React.useState<string>('');
-  const [selectedArticle, setSelectedArticle] = React.useState<Article>({
-    id: '',
-    publishedDate: '',
-    status: '',
-    totalViews: '',
-    categories: [],
-    title: '',
-  });
-
-  const { isOpen, onOpen, onClose } = useDialog();
-
-  React.useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    const response = await fetch(`${url}/data`);
-    const data = await response.json();
-    setData(data);
-  };
-  const handleOpenDialog = (article: Article, dialogType: DialogType) => {
-    setSelectedArticle(article);
-    onOpen();
-  };
-
-  const handleInput = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = ev.target;
-    setQuery(value);
-    handleSearch(value);
-  };
-
-  const handleSearch = useDebounce((value: string) => {
-    const loweredValue = value.toLowerCase();
-
-    const data = dummyData.filter((item) => {
-      if (loweredValue) {
-        return item.title.toLowerCase().includes(loweredValue);
-      } else {
-        return item;
-      }
-    });
-
-    setData(data);
-  }, 500);
+  const { query, isOpen, selectedArticle, onClose, handleInput, table } =
+    useContentPage();
 
   return (
     <main className="p-5 space-y-5">
-      <section className="flex flex-row flex-1 justify-between items-center">
-        <Title text="Content" />
-        <div className="flex flex-row gap-2 w-72">
-          <Menubar>
-            <MenubarMenu>
-              <MenubarTrigger>
-                <IoMdMenu />
-              </MenubarTrigger>
-              <MenubarContent>
-                <MenubarItem>Bulk Delete</MenubarItem>
-                <MenubarItem>Bulk Publish</MenubarItem>
-              </MenubarContent>
-            </MenubarMenu>
-          </Menubar>
-          <Input
-            placeholder="Search"
-            value={query}
-            onChange={(ev) => handleInput(ev)}
-          />
-        </div>
-      </section>
-
+      <HeaderPage query={query} table={table} handleInput={handleInput} />
       <Suspense fallback={<LoadingSkeleton />}>
-        <ItemTable data={data} handleOpenDialog={handleOpenDialog} />
+        <ItemTable table={table} />
       </Suspense>
+      <FooterPage table={table} />
       <Modal
         isOpen={isOpen}
         selectedArticle={selectedArticle}

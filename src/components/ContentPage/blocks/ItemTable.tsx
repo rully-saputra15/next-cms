@@ -1,24 +1,25 @@
 import React from 'react';
-import { FiEdit3 } from 'react-icons/fi';
-import { FaRegTrashCan } from 'react-icons/fa6';
+import { HeaderGroup, Table, flexRender } from '@tanstack/react-table';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import {
-  Table,
+  Table as TableComponent,
   TableHeader,
   TableHead,
   TableRow,
   TableCell,
   TableBody,
 } from '@/components/ui/table';
-import { Article, ArticleCategory, DialogType } from '@/lib/types';
+import { Article, ArticleCategory } from '@/lib/types';
 import { Card, CardContent } from '@/components/ui/card';
 import { NotFound } from '@/components/core';
 
 type Props = {
-  data: Article[];
-  handleOpenDialog: (item: Article, dialogType: DialogType) => void;
+  table: Table<Article>;
+};
+
+type TableTopHeaderProps = {
+  headerGroups: HeaderGroup<Article>[];
 };
 
 const renderCategories = (itemId: string, categories: ArticleCategory[]) =>
@@ -29,68 +30,50 @@ const renderCategories = (itemId: string, categories: ArticleCategory[]) =>
     </Badge>
   ));
 
-function TableTopHeader() {
+function TableTopHeader({ headerGroups }: TableTopHeaderProps) {
   return (
     <TableHeader>
-      <TableRow>
-        <TableHead>No</TableHead>
-        <TableHead>ID</TableHead>
-        <TableHead>Title</TableHead>
-        <TableHead>Categories</TableHead>
-        <TableHead>Published Date</TableHead>
-        <TableHead>Status</TableHead>
-        <TableHead>Total Views</TableHead>
-        <TableHead>Actions</TableHead>
-      </TableRow>
+      {headerGroups.map((item) => (
+        <TableRow key={item.id}>
+          {item.headers.map((header) => {
+            return (
+              <TableHead key={header.id}>
+                {header.isPlaceholder
+                  ? null
+                  : flexRender(
+                      header.column.columnDef.header,
+                      header.getContext(),
+                    )}
+              </TableHead>
+            );
+          })}
+        </TableRow>
+      ))}
     </TableHeader>
   );
 }
 
-function ItemTable({ data, handleOpenDialog }: Props) {
-  const renderTableBody = (data: Article[]) => {
-    return data.map((item, index) => (
-      <TableRow key={item.id}>
-        <TableCell>{index + 1}</TableCell>
-        <TableCell>{item.id}</TableCell>
-        <TableCell>{item.title}</TableCell>
-        <TableCell className="space-x-2">
-          {renderCategories(item.id, item.categories)}
-        </TableCell>
-        <TableCell>{item.publishedDate}</TableCell>
-        <TableCell>
-          <Badge
-            variant={item.status === 'Published' ? 'default' : 'destructive'}
-          >
-            {item.status}
-          </Badge>
-        </TableCell>
-        <TableCell className="font-bold">{item.totalViews}</TableCell>
-        <TableCell className="space-x-2">
-          <Button
-            variant="outline"
-            onClick={() => handleOpenDialog(item, 'edit')}
-          >
-            <FiEdit3 />
-          </Button>
-          <Button
-            variant="destructive"
-            onClick={() => handleOpenDialog(item, 'delete')}
-          >
-            <FaRegTrashCan />
-          </Button>
-        </TableCell>
+function ItemTable({ table }: Props) {
+  const renderTableBody = () => {
+    return table.getRowModel().rows?.map((row) => (
+      <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+        {row.getVisibleCells().map((cell) => (
+          <TableCell key={cell.id}>
+            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+          </TableCell>
+        ))}
       </TableRow>
     ));
   };
 
   return (
     <Card>
-      {data.length > 0 ? (
+      {table?.getRowModel()?.rows?.length > 0 ? (
         <CardContent>
-          <Table>
-            <TableTopHeader />
-            <TableBody>{renderTableBody(data)}</TableBody>
-          </Table>
+          <TableComponent>
+            <TableTopHeader headerGroups={table.getHeaderGroups()} />
+            <TableBody>{renderTableBody()}</TableBody>
+          </TableComponent>
         </CardContent>
       ) : (
         <NotFound />
