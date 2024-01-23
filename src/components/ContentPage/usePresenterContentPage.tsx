@@ -64,7 +64,7 @@ const dummyData: Article[] = [
   },
 ];
 
-export default function useContentPage() {
+export default function usePresenterContentPage() {
   const [data, setData] = React.useState<Article[]>([]);
   const [query, setQuery] = React.useState<string>('');
   const [selectedArticle, setSelectedArticle] = React.useState<Article>({
@@ -77,6 +77,11 @@ export default function useContentPage() {
   });
 
   const { isOpen, onOpen, onClose } = useDialog();
+  const {
+    isOpen: isNewArticleSheetOpen,
+    onOpen: onNewArticleSheetOpen,
+    onClose: onNewArticleSheetClose,
+  } = useDialog();
 
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -99,7 +104,6 @@ export default function useContentPage() {
   };
 
   const handleOpenDialog = (article: Article, dialogType: DialogType) => {
-    console.log(article);
     setSelectedArticle(article);
     onOpen();
   };
@@ -148,7 +152,10 @@ export default function useContentPage() {
     data,
     query,
     isOpen,
+    isNewArticleSheetOpen,
+    onNewArticleSheetOpen,
     onClose,
+    onNewArticleSheetClose,
     selectedArticle,
     handleInput,
     handleOpenDialog,

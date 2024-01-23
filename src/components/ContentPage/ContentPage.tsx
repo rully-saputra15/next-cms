@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
-import { Article } from '@/lib/types';
+import { Article, PopupProps } from '@/lib/types';
 
 import { LoadingSkeleton } from '../core';
 
@@ -27,66 +27,29 @@ import {
   SelectValue,
   SelectContent,
   SelectItem,
+  SelectLabel,
 } from '../ui/select';
-import useContentPage from './useContentPage';
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+} from '@/components/ui/sheet';
+import { Textarea } from '@/components/ui/textarea';
+
+import usePresenterContentPage from './usePresenterContentPage';
 import HeaderPage from './blocks/HeaderPage';
 import FooterPage from './blocks/FooterPage';
+import { SelectGroup } from '@radix-ui/react-select';
 
-type ModalProps = {
-  isOpen: boolean;
+type ModalProps = PopupProps & {
   selectedArticle: Article;
-  onClose: () => void;
 };
 
-const dummyData: Article[] = [
-  {
-    id: '001',
-    publishedDate: '2021-09-01',
-    status: 'Published',
-    totalViews: '20.000',
-    categories: [
-      {
-        id: 'CAT-001',
-        name: 'Fantasy',
-      },
-      {
-        id: 'CAT-002',
-        name: 'Adventure',
-      },
-    ],
-    title: 'Lorem Ipsum dor Selamet 1',
-  },
-  {
-    id: '002',
-    publishedDate: '2021-09-01',
-    status: 'Draft',
-    categories: [
-      {
-        id: 'CAT-001',
-        name: 'Fantasy',
-      },
-      {
-        id: 'CAT-002',
-        name: 'Adventure',
-      },
-    ],
-    totalViews: '10.000',
-    title: 'Lorem Ipsum dor Selamet 2',
-  },
-  {
-    id: '003',
-    publishedDate: '2021-09-01',
-    status: 'Published',
-    categories: [
-      {
-        id: 'CAT-003',
-        name: 'Horror',
-      },
-    ],
-    totalViews: '30.000',
-    title: 'Lorem Ipsum dor Selamet 3',
-  },
-];
+type NewArticleSheetProps = PopupProps;
 
 function Modal({ isOpen, selectedArticle, onClose }: ModalProps) {
   return (
@@ -128,13 +91,73 @@ function Modal({ isOpen, selectedArticle, onClose }: ModalProps) {
   );
 }
 
+function NewArticleSheet({ isOpen, onClose }: NewArticleSheetProps) {
+  return (
+    <Sheet open={isOpen} onOpenChange={onClose}>
+      <SheetContent>
+        <SheetHeader>
+          <SheetTitle>Add New Article</SheetTitle>
+          <SheetDescription>
+            Lorem ipsum dor selamet lorem ipsum dor selamet
+          </SheetDescription>
+        </SheetHeader>
+        <div className="flex flex-col gap-4 py-4">
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="title">Title</Label>
+            <Input id="title" placeholder="ex: lorem ipsuim dor sleamet" />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="description">Categories</Label>
+            <Select>
+              <SelectTrigger>
+                <SelectValue placeholder="Select Categories" />
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Article Categories</SelectLabel>
+                    <SelectItem value="horror">Horror</SelectItem>
+                    <SelectItem value="fantasy">Fantasy</SelectItem>
+                    <SelectItem value="adventure">Adventure</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </SelectTrigger>
+            </Select>
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="description">Description</Label>
+            <Textarea placeholder="ex: lorem ipsum" />
+          </div>
+        </div>
+        <SheetFooter>
+          <SheetClose asChild>
+            <Button type="submit">Submit</Button>
+          </SheetClose>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
+  );
+}
+
 function ContentPage() {
-  const { query, isOpen, selectedArticle, onClose, handleInput, table } =
-    useContentPage();
+  const {
+    query,
+    isOpen,
+    isNewArticleSheetOpen,
+    selectedArticle,
+    onNewArticleSheetOpen,
+    onClose,
+    onNewArticleSheetClose,
+    handleInput,
+    table,
+  } = usePresenterContentPage();
 
   return (
     <main className="p-5 space-y-5">
-      <HeaderPage query={query} table={table} handleInput={handleInput} />
+      <HeaderPage
+        query={query}
+        table={table}
+        handleInput={handleInput}
+        onSheetOpen={onNewArticleSheetOpen}
+      />
       <Suspense fallback={<LoadingSkeleton />}>
         <ItemTable table={table} />
       </Suspense>
@@ -143,6 +166,10 @@ function ContentPage() {
         isOpen={isOpen}
         selectedArticle={selectedArticle}
         onClose={onClose}
+      />
+      <NewArticleSheet
+        isOpen={isNewArticleSheetOpen}
+        onClose={onNewArticleSheetClose}
       />
     </main>
   );

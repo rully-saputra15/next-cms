@@ -1,6 +1,7 @@
 import { Table } from '@tanstack/react-table';
 import { IoMdMenu } from 'react-icons/io';
 import { LuSettings2 } from 'react-icons/lu';
+import { IoMdAddCircleOutline } from 'react-icons/io';
 
 import { Article } from '@/lib/types';
 import { Input } from '@/components/ui/input';
@@ -26,18 +27,26 @@ type Props = {
   query: string;
   table: Table<Article>;
   handleInput: (ev: React.ChangeEvent<HTMLInputElement>) => void;
+  onSheetOpen: () => void;
 };
 
-export default function HeaderPage({ query, table, handleInput }: Props) {
-  console.log(table.getAllColumns());
+export default function HeaderPage({
+  query,
+  table,
+  handleInput,
+  onSheetOpen,
+}: Props) {
   return (
     <section className="flex flex-row flex-1 justify-between items-center">
       <Title text="Content" />
       <div className="flex flex-row gap-2 w-96">
+        <Button variant="outline" onClick={onSheetOpen}>
+          <IoMdAddCircleOutline />
+        </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline">
-              <LuSettings2 className="mr-2" /> View
+              <LuSettings2 />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">

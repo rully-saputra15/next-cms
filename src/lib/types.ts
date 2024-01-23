@@ -13,3 +13,8 @@ export type ArticleCategory = {
 };
 
 export type DialogType = 'edit' | 'delete';
+
+export type PopupProps = {
+  isOpen: boolean;
+  onClose: () => void;
+};

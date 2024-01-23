@@ -19,7 +19,14 @@ function Header() {
           >
             Home
           </Link>
-          <li className="font-light">Insight</li>
+          <Link
+            href="/insight"
+            className={
+              pathname === PATH_PAGE.INSIGHT ? 'font-bold' : 'font-light'
+            }
+          >
+            Insight
+          </Link>
           <Link
             className={
               pathname === PATH_PAGE.CONTENT ? 'font-bold' : 'font-light'

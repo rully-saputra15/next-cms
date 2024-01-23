@@ -1,7 +1,7 @@
 'use client';
 
 import { InformationCard } from '@/components/core';
-import { mainColor } from '@/helpers/colors';
+import { lilacColor, mainColor } from '@/helpers/colors';
 import React from 'react';
 import {
   BarChart,
@@ -119,7 +119,7 @@ function ChartSection() {
               nameKey="name"
               cx="50%"
               cy="50%"
-              fill="#8884d8"
+              fill={lilacColor}
               innerRadius={60}
               label
             />
