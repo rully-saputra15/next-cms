@@ -3,6 +3,7 @@ import React from 'react';
 export default function useDebounce(callback: Function, delay: number) {
   const timer = React.useRef<any>(null);
 
+  // eslint-disable-next-line arrow-body-style
   React.useEffect(() => {
     return () => {
       if (timer.current) {
