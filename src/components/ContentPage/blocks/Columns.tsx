@@ -39,18 +39,16 @@ export default function useColumns(callback: Function) {
     },
     {
       accessorKey: 'title',
-      header: ({ column }) => {
-        return (
-          <Button
-            variant="ghost"
-            className="-ml-4"
-            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          >
-            Title
-            <RxCaretSort className="ml-2" />
-          </Button>
-        );
-      },
+      header: ({ column }) => (
+        <Button
+          variant="ghost"
+          className="-ml-4"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Title
+          <RxCaretSort className="ml-2" />
+        </Button>
+      ),
     },
     {
       accessorKey: 'categories',

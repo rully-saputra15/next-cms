@@ -1,7 +1,6 @@
 import React from 'react';
 import { HeaderGroup, Table, flexRender } from '@tanstack/react-table';
 
-import { Badge } from '@/components/ui/badge';
 import {
   Table as TableComponent,
   TableHeader,
@@ -10,7 +9,7 @@ import {
   TableCell,
   TableBody,
 } from '@/components/ui/table';
-import { Article, ArticleCategory } from '@/lib/types';
+import { Article } from '@/lib/types';
 import { Card, CardContent } from '@/components/ui/card';
 import { NotFound } from '@/components/core';
 
@@ -22,31 +21,21 @@ type TableTopHeaderProps = {
   headerGroups: HeaderGroup<Article>[];
 };
 
-const renderCategories = (itemId: string, categories: ArticleCategory[]) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  categories.map((category) => (
-    <Badge variant="secondary" key={`${itemId} ${category.id}`}>
-      {category.name}
-    </Badge>
-  ));
-
 function TableTopHeader({ headerGroups }: TableTopHeaderProps) {
   return (
     <TableHeader>
       {headerGroups.map((item) => (
         <TableRow key={item.id}>
-          {item.headers.map((header) => {
-            return (
-              <TableHead key={header.id}>
-                {header.isPlaceholder
-                  ? null
-                  : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    )}
-              </TableHead>
-            );
-          })}
+          {item.headers.map((header) => (
+            <TableHead key={header.id}>
+              {header.isPlaceholder
+                ? null
+                : flexRender(
+                    header.column.columnDef.header,
+                    header.getContext(),
+                  )}
+            </TableHead>
+          ))}
         </TableRow>
       ))}
     </TableHeader>
@@ -54,8 +43,8 @@ function TableTopHeader({ headerGroups }: TableTopHeaderProps) {
 }
 
 function ItemTable({ table }: Props) {
-  const renderTableBody = () => {
-    return table.getRowModel().rows?.map((row) => (
+  const renderTableBody = () =>
+    table.getRowModel().rows?.map((row) => (
       <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
         {row.getVisibleCells().map((cell) => (
           <TableCell key={cell.id}>
@@ -64,7 +53,6 @@ function ItemTable({ table }: Props) {
         ))}
       </TableRow>
     ));
-  };
 
   return (
     <Card>

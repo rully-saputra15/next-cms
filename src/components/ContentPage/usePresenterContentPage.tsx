@@ -93,40 +93,40 @@ export default function usePresenterContentPage() {
 
   const [rowSelection, setRowSelection] = React.useState({});
 
+  const fetchData = async () => {
+    const response = await fetch(`${url}/data`);
+    const res = await response.json();
+    setData(res);
+  };
+
   React.useEffect(() => {
     fetchData();
   }, []);
 
-  const fetchData = async () => {
-    const response = await fetch(`${url}/data`);
-    const data = await response.json();
-    setData(data);
-  };
-
   const handleOpenDialog = (article: Article, dialogType: DialogType) => {
+    console.log(dialogType);
     setSelectedArticle(article);
     onOpen();
   };
+
+  const handleSearch = useDebounce((value: string) => {
+    const loweredValue = value.toLowerCase();
+
+    const result = dummyData.filter((item) => {
+      if (loweredValue) {
+        return item.title.toLowerCase().includes(loweredValue);
+      }
+      return item;
+    });
+
+    setData(result);
+  }, 500);
 
   const handleInput = (ev: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = ev.target;
     setQuery(value);
     handleSearch(value);
   };
-
-  const handleSearch = useDebounce((value: string) => {
-    const loweredValue = value.toLowerCase();
-
-    const data = dummyData.filter((item) => {
-      if (loweredValue) {
-        return item.title.toLowerCase().includes(loweredValue);
-      } else {
-        return item;
-      }
-    });
-
-    setData(data);
-  }, 500);
 
   const columns = useColumns(handleOpenDialog);
   const table = useReactTable({

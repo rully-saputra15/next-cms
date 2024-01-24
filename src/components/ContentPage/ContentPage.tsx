@@ -8,9 +8,18 @@ import { Button } from '@/components/ui/button';
 
 import { Article, PopupProps } from '@/lib/types';
 
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+} from '@/components/ui/sheet';
+import { SelectGroup } from '@radix-ui/react-select';
 import { LoadingSkeleton } from '../core';
-
-const ItemTable = dynamic(() => import('./blocks/ItemTable'));
 
 import {
   Dialog,
@@ -29,21 +38,12 @@ import {
   SelectItem,
   SelectLabel,
 } from '../ui/select';
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-} from '@/components/ui/sheet';
-import { Textarea } from '@/components/ui/textarea';
 
 import usePresenterContentPage from './usePresenterContentPage';
 import HeaderPage from './blocks/HeaderPage';
 import FooterPage from './blocks/FooterPage';
-import { SelectGroup } from '@radix-ui/react-select';
+
+const ItemTable = dynamic(() => import('./blocks/ItemTable'));
 
 type ModalProps = PopupProps & {
   selectedArticle: Article;

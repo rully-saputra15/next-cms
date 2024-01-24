@@ -1,7 +1,6 @@
 import { Table } from '@tanstack/react-table';
-import { IoMdMenu } from 'react-icons/io';
+import { IoMdMenu, IoMdAddCircleOutline } from 'react-icons/io';
 import { LuSettings2 } from 'react-icons/lu';
-import { IoMdAddCircleOutline } from 'react-icons/io';
 
 import { Article } from '@/lib/types';
 import { Input } from '@/components/ui/input';
@@ -55,20 +54,16 @@ export default function HeaderPage({
             {table
               .getAllColumns()
               .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
+              .map((column) => (
+                <DropdownMenuCheckboxItem
+                  key={column.id}
+                  className="capitalize"
+                  checked={column.getIsVisible()}
+                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                >
+                  {column.id}
+                </DropdownMenuCheckboxItem>
+              ))}
           </DropdownMenuContent>
         </DropdownMenu>
         <Menubar>
