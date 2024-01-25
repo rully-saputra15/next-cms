@@ -20,12 +20,12 @@ function Header() {
             Home
           </Link>
           <Link
-            href="/insight"
+            href="/analytics"
             className={
-              pathname === PATH_PAGE.INSIGHT ? 'font-bold' : 'font-light'
+              pathname === PATH_PAGE.ANALYTICS ? 'font-bold' : 'font-light'
             }
           >
-            Insight
+            Analytics
           </Link>
           <Link
             className={
