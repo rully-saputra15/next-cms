@@ -13,6 +13,7 @@ import {
 } from 'recharts';
 
 import ContentCard from '@/components/core/ContentCard';
+
 import {
   ResizableHandle,
   ResizablePanel,
@@ -54,7 +55,7 @@ export default function ArtileInsightSection() {
       className="w-full h-full rounded-lg border"
     >
       <ResizablePanel defaultSize={25}>
-        <div className="flex flex-row gap-3 flex-wrap h-96 items-stretch justify-center p-6">
+        <div className="flex flex-row gap-3 flex-wrap h-full items-stretch justify-center p-6">
           <ContentCard
             title="Top Article"
             content="10.000"
@@ -71,13 +72,24 @@ export default function ArtileInsightSection() {
             content="20.400"
             note="ipsum ipsum"
           />
+          <ContentCard
+            title="Lorem Ipsum"
+            content="10.400"
+            note="ipsum ipsum"
+          />
+          <ContentCard
+            title="Lorem Ipsum"
+            content="20.200"
+            note="ipsum ipsum"
+          />
         </div>
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={75}>
         <ResizablePanelGroup direction="vertical">
           <ResizablePanel defaultSize={50}>
-            <div className="flex h-full items-center justify-center p-6">
+            <div className="flex h-full flex-col items-center justify-center p-6 gap-3">
+              <p className="font-bold text-xl self-start">Pages</p>
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={data}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -97,7 +109,8 @@ export default function ArtileInsightSection() {
           </ResizablePanel>
           <ResizableHandle withHandle />
           <ResizablePanel defaultSize={50}>
-            <div className="flex h-full items-center justify-center p-6">
+            <div className="flex h-full flex-col items-center justify-center p-6 gap-3">
+              <p className="font-bold text-xl self-start">Trends</p>
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={data}>
                   <CartesianGrid strokeDasharray="3 3" />
