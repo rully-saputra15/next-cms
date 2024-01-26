@@ -10,8 +10,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+
 import { useDebounce, useDialog } from '@/hooks';
-import { url } from '@/config/api';
 import useColumns from './blocks/Columns';
 
 const dummyData: Article[] = [
@@ -94,9 +94,9 @@ export default function usePresenterContentPage() {
   const [rowSelection, setRowSelection] = React.useState({});
 
   const fetchData = async () => {
-    const response = await fetch(`${url}/data`);
-    const res = await response.json();
-    setData(res);
+    // const response = await fetch(`${url}/data`);
+    // const res = await response.json();
+    setData(dummyData);
   };
 
   React.useEffect(() => {
